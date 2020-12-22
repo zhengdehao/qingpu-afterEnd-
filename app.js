@@ -4,7 +4,20 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
+const mongoose = require('mongoose');
 
+// 第一步, 连接数据库
+mongoose.connect('mongodb://42.192.155.18:27017/qingpu', 
+  { useNewUrlParser: true, useUnifiedTopology: true }
+);
+
+// 判断是否连接成功
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  // we're connected!
+  console.log('数据库连接成功');
+});
 
 var homeRouter = require('./routes/home');
 
