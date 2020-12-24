@@ -2,15 +2,29 @@ var express = require('express');
 var router = express.Router();
 const detailModel = require('../model/recommend.js');
 
-router.post('/recommend', (req, res, next) => {
+router.get('/recommend', (req, res, next) => {
   // 第四步， 查询， 根据模型进行查询
-  console.log(req.body.id)
-  detailModel.find({ cityId: Number(req.body.id) }, (err, doc) => {
-    console.log(doc);
+  console.log()
+  detailModel.find({}, (err, doc) => {
+    // console.log(doc);
     if (err) throw err;
+    doc = JSON.parse(JSON.stringify(doc))
+    let result = {};
+    let hotList =  doc.filter(item => {
+      return item.type === "0";
+    });
+    let holidayList = doc.filter(item => {
+      return item.type === "1";
+    });
+    let tripList = doc.filter(item => {
+      return item.type === "2";
+    });
+    result["hotList"] = hotList;
+    result["holidayList"] = holidayList;
+    result["tripList"] = tripList;
     res.json({
       status: 0,
-      result: doc
+      result: result
     })
   })
 }) 
