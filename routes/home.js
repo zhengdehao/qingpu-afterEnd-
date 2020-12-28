@@ -34,11 +34,23 @@ router.get('/banner', (req, res, next) => {
     status: 0,
     result: {
       list: [
-        "//gw.alicdn.com/imgextra/i2/48/O1CN01cjcmAm1CE1eo0mivo_!!48-0-lubanu.jpg",
-        "//img.alicdn.com/imgextra/i1/127/O1CN01qQyzyw1CoCwhyH89F_!!127-0-luban.jpg",
-        "//img.alicdn.com/imgextra/i2/143/O1CN010jC8291CvXHYvkVeH_!!143-0-luban.jpg"
+        "//42.192.155.18:3180/images/banner/banner_01.jpg",
+        "//42.192.155.18:3180/images/banner/banner_02.jpg",
+        "//42.192.155.18:3180/images/banner/banner_03.jpg",
+        "//42.192.155.18:3180/images/banner/banner_04.jpg"
       ]
     }
+  })
+})
+
+router.post("/detail", (req, res, next) => {
+  console.log(req.body);
+  detailModel.find(req.body, (err, doc) => {
+    if(err) throw err;
+    res.json({
+      status: "0",
+      result: doc
+    })
   })
 })
 
