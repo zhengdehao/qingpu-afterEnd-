@@ -6,7 +6,7 @@ router.get('/recommend', (req, res, next) => {
   // 第四步， 查询， 根据模型进行查询
   console.log()
   detailModel.find({}, (err, doc) => {
-    // console.log(doc);
+    console.log(doc);
     if (err) throw err;
     doc = JSON.parse(JSON.stringify(doc))
     let result = {};
@@ -19,11 +19,19 @@ router.get('/recommend', (req, res, next) => {
     let tripList = doc.filter(item => {
       return item.type === "2";
     });
+    let expList = doc.filter(item => {
+      return item.type === "3";
+    })
+    let suxinList = doc.filter(item => {
+      return item.type === "4";
+    })
     result["hotList"] = hotList;
     result["holidayList"] = holidayList;
     result["tripList"] = tripList;
+    result["expList"] = expList;
+    result["suxinList"] = suxinList;
     res.json({
-      status: 0,
+      status: "0",
       result: result
     })
   })
