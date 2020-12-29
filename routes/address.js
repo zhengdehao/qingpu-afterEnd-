@@ -10,6 +10,7 @@ router.post("/get", (req, res, next) => {
   usersModel.find(req.body, (err, doc) => {
     if(err) throw err;
     res.json({
+      status: "0",
       addressList: doc.addressList
     })
   })
@@ -32,6 +33,7 @@ router.post("/set", (req, res, next) => {
     usersModel.updateOne({phone: req.body.phone}, {addressList: doc.addressList}, function(err){
       if (err) throw err;
       res.json({
+        status: "0",
         msg:"地址加入成功"
       })
     })
@@ -57,6 +59,7 @@ router.post("/update", (req, res, next) => {
     usersModel.updateOne({phone: req.body.phone}, {addressList: doc[0].addressList}, err => {
       if(err) throw err;
       res.json({
+        status: "0",
         msg: "地址修改完成"
       })
     })

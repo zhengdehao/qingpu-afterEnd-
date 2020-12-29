@@ -22,6 +22,8 @@ db.once('open', function() {
 var homeRouter = require('./routes/home');
 var usersRouter = require('./routes/users');
 var addressRouter = require('./routes/address');
+var goodsRouter = require('./routes/goods');
+var findsRouter = require('./routes/find');
 
 var app = express();
 
@@ -33,13 +35,15 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 
 app.use(cors());
 
 app.use('/home', homeRouter);
 app.use('/users', usersRouter);
 app.use("/address", addressRouter);
+app.use("/goods", goodsRouter);
+app.use("/finds", findsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -85,7 +85,7 @@ router.post('/register', (req, res, next) => {
         info = JSON.parse(JSON.stringify(info));
         if(info.length) {
             res.json({
-              status: "1001",
+              status: "0",
               msg: "登录成功",
               result: info,
               // needName: "0"
@@ -103,7 +103,7 @@ router.post('/register', (req, res, next) => {
           user.save(err=> {
             if (err) throw err;
             res.json({
-              status: "1002",
+              status: "0",
               msg: "注册成功",
               // needName: "1",
               phone: req.body.phone
